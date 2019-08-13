@@ -160,7 +160,7 @@ $power1 = function ($val, $pow) use (&$power1) {
         return($val * $power1($val,$pow-1));
     }
     elseif ($pow < 0){
-        return(1/(power($val,-$pow)));
+        return(1/($power1($val,-$pow)));
     }
     return "Error";
 };
