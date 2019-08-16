@@ -9,15 +9,9 @@ $a = rand(-100,100);
 $b = rand(-100,100);
 
 if (($a >= 0) && ($b >= 0)){ // если оба числа положительные
-    // определим болшее число и вычтем из него меньшее
-    if ($a > $b){
-        echo $a - $b;
-    }
-    else {
-        echo $b - $a;
-    }
+    echo $a - $b;
 }
-elseif (($a < 0) && ($b < 0)){ // если оба числа отрицательные
+elseif ($a < 0 && $b < 0){ // если оба числа отрицательные
     echo $a * $b;
 }
 else { // в противном случаен одно число положительное другое отрицательное
@@ -34,35 +28,35 @@ echo "<br>";
 $a = rand(1,15);
 switch ($a){
     case 1:
-        echo 1 . " ";
+        echo $a++ . " ";
     case 2:
-        echo 2 . " ";
+        echo $a++ . " ";
     case 3:
-        echo 3 . " ";
+        echo $a++ . " ";
     case 4:
-        echo 4 . " ";
+        echo $a++ . " ";
     case 5:
-        echo 5 . " ";
+        echo $a++ . " ";
     case 6:
-        echo 6 . " ";
+        echo $a++ . " ";
     case 7:
-        echo 7 . " ";
+        echo $a++ . " ";
     case 8:
-        echo 8 . " ";
+        echo $a++ . " ";
     case 9:
-        echo 9 . " ";
+        echo $a++ . " ";
     case 10:
-        echo 10 . " ";
+        echo $a++ . " ";
     case 11:
-        echo 11 . " ";
+        echo $a++ . " ";
     case 12:
-        echo 12 . " ";
+        echo $a++ . " ";
     case 13:
-        echo 13 . " ";
+        echo $a++ . " ";
     case 14:
-        echo 14 . " ";
+        echo $a++ . " ";
     case 15:
-        echo 15 . " ";
+        echo $a++ . " ";
         break;
     default:
         echo "Число задано неверно";
@@ -106,13 +100,13 @@ function division($a,$b){
 function mathOperation($arg1, $arg2, $operation){
     switch($operation){
         case "+":
-            return(addition($arg1,$arg2));
+            return addition($arg1,$arg2);
         case "-":
-            return(subtraction($arg1,$arg2));
+            return subtraction($arg1,$arg2);
         case "*":
-            return(multiply($arg1,$arg2));
+            return multiply($arg1,$arg2);
         case "/":
-            return(division($arg1,$arg2));
+            return division($arg1,$arg2);
         default:
             return "Error";
     }
@@ -138,10 +132,10 @@ function power($val, $pow){
         return(1);
     }
     elseif ($pow > 0) {
-        return ($val * power($val, $pow - 1));
+        return $val * power($val, $pow - 1);
     }
     elseif ($pow < 0){
-            return(1/(power($val,-$pow)));
+            return 1/(power($val,-$pow));
     }
     return "Error";
 }
@@ -157,10 +151,10 @@ $power1 = function ($val, $pow) use (&$power1) {
         return(1);
     }
     elseif ($pow > 0){
-        return($val * $power1($val,$pow-1));
+        return $val * $power1($val,$pow-1);
     }
     elseif ($pow < 0){
-        return(1/($power1($val,-$pow)));
+        return 1/($power1($val,-$pow));
     }
     return "Error";
 };
@@ -196,6 +190,7 @@ function numberDeclination($val){
     }else{
         return 2;
     }
+
 }
 
 function currentTime(){
