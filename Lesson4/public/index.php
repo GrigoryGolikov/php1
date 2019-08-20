@@ -22,9 +22,9 @@ switch ($page) {
         ];
         _log($params, "params");
         break;
-        case 'gallery':
+    case 'gallery':
         $params = [
-            'images' => getImages("/images_dir/small/")
+            'images' => getImages(ROOT_DIR . IMG_SML_DIR)
         ];
 
         break;
@@ -39,8 +39,6 @@ switch ($page) {
         die();
         break;
 }
-
-
 
 echo render($page, $params);
 

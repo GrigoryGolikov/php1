@@ -5,7 +5,6 @@ function render($page, $params = [])
     return renderTempate("layout", ['content' => renderTempate($page, $params)]);
 }
 
-
 function renderTempate($page, $params = [])
 {
     ob_start();
@@ -17,9 +16,14 @@ function renderTempate($page, $params = [])
     if (file_exists($filename)) {
         include $filename;
     } else {
-        echo "Страницы не существует 404";
+        echo "РЎС‚СЂР°РЅРёС†Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ 404";
     }
 
-
     return ob_get_clean();
+}
+
+function getImages($page){
+
+    return array_slice(scandir($page),2);
+
 }
