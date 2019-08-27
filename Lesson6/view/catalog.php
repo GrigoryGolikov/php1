@@ -1,5 +1,6 @@
 Каталог<br>
 
-<?foreach ($catalog as $item): ?>
-Товар: <?=$item?> <br>
-<?endforeach;?>
+<?php foreach ($catalog as $item) : ?>
+    <p><a href="/product/<?=$item['id']?>"><?=$item['name']?> : <?=$item['price']?> руб. </a> </p>
+<?php endforeach;?>
+

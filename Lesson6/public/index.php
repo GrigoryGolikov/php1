@@ -9,6 +9,7 @@ $url_array = explode("/", $_SERVER['REQUEST_URI']);
 $page = "";
 $action = "";
 $id = "";
+$action_= "add";
 if ($url_array[1] == "") {
     $page = 'main';
 } else {
@@ -21,8 +22,10 @@ if ($url_array[1] == "") {
             if (is_numeric($url_array[3])) {
                 $id = $url_array[3];
             }
+
         }
     }
+
 }
 
 $params = prepareVariables($page, $action, $id);

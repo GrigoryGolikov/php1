@@ -1,3 +1,3 @@
 
 
-<p><?=$newscontent['text']?> </p>
+<p><?=$product['information']?> </p>
