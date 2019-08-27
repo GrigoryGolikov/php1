@@ -35,6 +35,13 @@ function getAssocResult($sql)
     return $array_result;
 }
 
+function executeQuery($sql){
+    $db = getDb();
+    $result = @mysqli_query($db, $sql) or die(mysqli_error($db));
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
 //При желании можно закрыть соединение (если уж и вызывать, то после render на главной)
 function closeDb() {
     mysqli_close(getDb());

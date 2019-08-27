@@ -71,11 +71,11 @@ function renderTempate($page, $params = [])
 function updateImages() {
 
     $sql = "DELETE FROM `imgs` WHERE 1";
-    getAssocResult($sql);
+    executeQuery($sql);
     $arrImg = array_slice(scandir(ROOT_DIR . IMG_SML_DIR),2);
     foreach ($arrImg as $item){
         $sql = "INSERT INTO `imgs`( `fileName`) VALUES ('{$item}')";
-        getAssocResult($sql);
+        executeQuery($sql);
     }
 
 }
