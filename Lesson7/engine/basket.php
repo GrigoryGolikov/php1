@@ -3,7 +3,6 @@ function doBasketAction($action) {
     if (isset($_GET['id'])){
         deleteGood($_GET['id']);
     }
-
 }
 
 function deleteGood($id) {

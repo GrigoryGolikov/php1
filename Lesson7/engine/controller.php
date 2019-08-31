@@ -23,7 +23,7 @@ function prepareVariables($page, $action, $id)
 
             auth($_POST['login'],$_POST['pass']);
 
-            //header("Location: /");
+            header("Location: /");
             break;
 
         case 'logout':
