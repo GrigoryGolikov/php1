@@ -1,5 +1,13 @@
 <?php
+function doGoodsAction($action) {
 
+    if (isset($_GET['id'])){
+        addGood($_GET['id']);
+    }
+
+   // header("Location: /catalog/");
+
+}
 function getOneGood($id) {
     $id = (int)$id;
     $sql = "SELECT * FROM goods WHERE id = {$id}";

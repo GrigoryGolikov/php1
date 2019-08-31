@@ -11,10 +11,10 @@
 
 
 
-<?foreach ($feedback as $item): ?>
+<?php foreach ($feedback as $item): ?>
 <p>
     <b><?=$item['name']?>:</b> <?=$item['feedback']?> <a href="/feedback/edit/<?=$item['id']?>">[править]</a>  <a href="/feedback/delete/<?=$item['id']?>">[x]</a><br>
 </p>
-<?endforeach;?>
+<?php endforeach;?>
 
 

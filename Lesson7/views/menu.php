@@ -1,15 +1,15 @@
-<? if (!$allow): ?>
+<?php if (!$allow): ?>
 <form action="/login/" method="post">
     <input type='text' name='login' placeholder='Логин'>
     <input type='password' name='pass' placeholder='Пароль'>
     Save? <input type='checkbox' name='save'>
     <input type='submit' name='send'>
 </form>
-<?else:?>
+<?php else:?>
 Добро пожаловать, <?=$user?> <a href='/logout/'>выход</a><br>
 
 
-<?endif;?>
+<?php endif;?>
 
 
 

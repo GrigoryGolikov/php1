@@ -15,17 +15,19 @@ function prepareVariables($page, $action, $id)
         $params['allow'] = true;
         $params['user'] = get_user();
     }
-    $params['count'] = "";
+
     switch ($page) {
 
         case 'login':
             //проверка логина и пароля
-            var_dump($_POST);
-            die();
 
+            auth($_POST['login'],$_POST['pass']);
+
+            //header("Location: /");
             break;
 
         case 'logout':
+
             session_destroy();
             setcookie("hash");
             header("Location: /");
@@ -57,16 +59,22 @@ function prepareVariables($page, $action, $id)
             $params['feedback'] = getAllFeedback();
 
             break;
-
+        case 'basket':
+            doBasketAction($id);
+            $params['basket'] = getAllBasket();
+            break;
         case 'catalog':
-
+            doGoodsAction($id);
             $params['goods'] = getAllGoods();
             break;
 
         case 'item':
+            var_dump($id);
+            doGoodsAction($id);
             $params['good'] = getOneGood($id);
             break;
     }
+    $params['count'] = getCountBasket();
 
     return $params;
 }
