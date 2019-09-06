@@ -16,7 +16,6 @@ function prepareVariables($page, $action, $id)
         $params['allow'] = true;
         $params['user'] = get_user();
         $params['admin'] = $params['user'] =="admin";
-        var_dump($params['admin'] );
     }
     $params['count'] = getBasketCount();
     switch ($page) {
@@ -74,6 +73,7 @@ function prepareVariables($page, $action, $id)
 
         case 'item':
             $params['good'] = getOneGood($id);
+            addToBasket($id);
             break;
 
         case "basket":
@@ -83,9 +83,34 @@ function prepareVariables($page, $action, $id)
 
             break;
 
+        case "admin":
+
+            if ($params['admin']) {
+                $params['orders'] = getOrders();
+            }
+            break;
+
+        case "orderDetails":
+
+            $details = getOrder($id);
+            $params['name'] = $details['name'];
+            $params['adres'] = $details['adres'];
+            $params['phone'] = $details['phone'];
+            $params['status'] = $details['status'];
+            $params['id_order'] = $id;
+            $params['basket'] = getDetails($id);
+            break;
+        case "order":
+
+            addBasketToOrder();
+
+            header("Location: /");
+            break;
 
         case 'api':
+
             if ($action == "buy") {
+
                 $data = json_decode(file_get_contents('php://input'));
                 $id = (int)$data->id;
 
@@ -105,6 +130,19 @@ function prepareVariables($page, $action, $id)
                 $params['count'] = getBasketCount();
                 $params['summ'] = summFromBasket();
                 $params['id'] = $id;
+
+                header("Content-type: application/json");
+                echo json_encode($params);
+                die();
+            }
+            if ($action == "updateOrder") {
+                $data = json_decode(file_get_contents('php://input'));
+                $id = (int)$data->id;
+                $status = (int)$data->status;
+
+                updateStatusOrder($id, $status);
+
+                $params['status'] = getStatus($status);
 
                 header("Content-type: application/json");
                 echo json_encode($params);

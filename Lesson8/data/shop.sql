@@ -1,25 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Авг 31 2019 г., 21:03
--- Версия сервера: 8.0.12
--- Версия PHP: 7.1.22
+-- Хост: localhost:3306
+-- Время создания: Сен 06 2019 г., 15:05
+-- Версия сервера: 5.7.26
+-- Версия PHP: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- База данных: `shop`
+-- База данных: `shop8`
 --
 
 -- --------------------------------------------------------
@@ -31,27 +23,23 @@ SET time_zone = "+00:00";
 CREATE TABLE `basket` (
   `id` int(11) NOT NULL,
   `goods_id` int(11) NOT NULL,
-  `session_id` text NOT NULL
+  `session_id` text NOT NULL,
+  `framed` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `basket`
 --
 
-INSERT INTO `basket` (`id`, `goods_id`, `session_id`) VALUES
-(1, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v'),
-(2, 2, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v'),
-(3, 1, 'unggkdqubc480dpg5ds0krk9t3uri8n7'),
-(4, 3, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v'),
-(5, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v'),
-(6, 2, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v'),
-(7, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v'),
-(8, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v'),
-(15, 3, 'kji2vlg327bqc374ojj4cai5ruv1g0qi'),
-(26, 1, '6d1gtpppromeif5t0hga8id61o3nl96o'),
-(27, 1, '6d1gtpppromeif5t0hga8id61o3nl96o'),
-(28, 1, '6d1gtpppromeif5t0hga8id61o3nl96o'),
-(29, 1, '6d1gtpppromeif5t0hga8id61o3nl96o');
+INSERT INTO `basket` (`id`, `goods_id`, `session_id`, `framed`) VALUES
+(1, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 1),
+(2, 2, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 1),
+(4, 3, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 1),
+(5, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 1),
+(6, 2, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 1),
+(7, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 1),
+(8, 1, 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 1),
+(61, 2, '9v2is9l4jmc1o084s9tjugh72a', 1);
 
 -- --------------------------------------------------------
 
@@ -102,7 +90,7 @@ CREATE TABLE `goods` (
   `id` int(11) NOT NULL,
   `image` text NOT NULL,
   `name` text NOT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `description` text NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -147,15 +135,37 @@ CREATE TABLE `orders` (
   `name` text NOT NULL,
   `phone` text NOT NULL,
   `adres` text NOT NULL,
-  `session_id` text NOT NULL
+  `session_id` text NOT NULL,
+  `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `orders`
 --
 
-INSERT INTO `orders` (`id`, `name`, `phone`, `adres`, `session_id`) VALUES
-(1, 'Иван', '34234', 'Москва', 'si967rjm76fqf2sn19d4a5rj6j4kbi4v');
+INSERT INTO `orders` (`id`, `name`, `phone`, `adres`, `session_id`, `status_id`) VALUES
+(1, 'Иван', '34234', 'Москва', 'si967rjm76fqf2sn19d4a5rj6j4kbi4v', 3),
+(3, 'Сергей', 'нету', 'Дом', '9v2is9l4jmc1o084s9tjugh72a', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `orderStatuses`
+--
+
+CREATE TABLE `orderStatuses` (
+  `id` int(11) NOT NULL,
+  `status` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `orderStatuses`
+--
+
+INSERT INTO `orderStatuses` (`id`, `status`) VALUES
+(1, 'new'),
+(2, 'accepted'),
+(3, 'closed');
 
 -- --------------------------------------------------------
 
@@ -175,7 +185,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
-(1, 'admin', '$2y$10$GAh95KWqFf1Fw4YyH/BCnuODYbJ1Mln78vDuOIwj7WQvChhR8QcX.', '532000855d6a9f73b24ad4.22882762');
+(1, 'admin', '$2y$10$GAh95KWqFf1Fw4YyH/BCnuODYbJ1Mln78vDuOIwj7WQvChhR8QcX.', '19117224855d718006701ad3.05302803');
 
 --
 -- Индексы сохранённых таблиц
@@ -218,6 +228,12 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `orderStatuses`
+--
+ALTER TABLE `orderStatuses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -231,7 +247,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -261,15 +277,16 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `orderStatuses`
+--
+ALTER TABLE `orderStatuses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

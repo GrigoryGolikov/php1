@@ -9,7 +9,7 @@ define("ENGINE_DIR", "../engine/");
 define('HOST', 'localhost');
 define('USER', 'root');
 define('PASS', 'root');
-define('DB', 'shop_8');
+define('DB', 'shop8');
 
 const ERR_CODE = [
     null => "",

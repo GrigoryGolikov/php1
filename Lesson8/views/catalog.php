@@ -1,6 +1,6 @@
 
 <?php foreach ($goods as $good): ?>
-<div>
+<div >
     <a href="/item/<?=$good["id"]?>">
     <b><?=$good['name']?></b><br>
     <img width="150" src="/img/<?=$good['image']?>" alt=""></a><br>
